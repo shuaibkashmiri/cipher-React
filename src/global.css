@@ -2,3 +2,12 @@
     margin: 0%;
     padding: 0%;
 }
+
+.minHeight{
+    min-height: 90vh;
+}
+
+.dark{
+    background-color: black;
+    color: #fff;
+}
