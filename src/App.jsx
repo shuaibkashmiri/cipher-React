@@ -4,9 +4,10 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './components/Home/'
 import Contact from './components/Contact'
-import About from './components/About'
+
 import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import PageNotFound from './components/PageNotFound'
+// import Gallery from './components/Gallery'
 const App = () => {
   return (
     <div>
@@ -15,7 +16,7 @@ const App = () => {
 <Routes>
  <Route path='*' element={<PageNotFound/>}/>
  <Route path='/' element={<Home/>}/>
- <Route path='/about' element={<About/>}/>
+ {/* <Route path='/about' element={<Gallery/>}/> */}
  <Route path='/contact' element={<Contact/>}/>
 
 </Routes>

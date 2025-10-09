@@ -21,8 +21,9 @@
 .home{
     min-height: 90vh;
     display: flex;
-    justify-content: center;
-    padding: 10% 0;
+ flex-wrap:wrap;
+gap: 15px; 
+ justify-content:center
 }
 
 
@@ -64,18 +65,27 @@
     min-height: 90vh;
 }
 
-.namecard{
-    border: 1px solid black;
-    width: 300px;
-    height: 30vh;
-    margin-left: 30px;
-    padding: 1% 1%;
-    background: #2A7B9B;
-background: linear-gradient(90deg,rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+.imageCard {
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
 
->img{
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+.imageCard > img {
+  width: 100%;
+  border-radius: 6px;
 }
+
+.imageCard > h3 {
+  font-size: 16px;
+  margin-top: 10px;
 }
+
+.imageCard > p {
+  color: #555;
+  font-size: 14px;
+}
+
