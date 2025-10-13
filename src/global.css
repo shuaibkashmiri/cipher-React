@@ -27,44 +27,143 @@ gap: 15px;
 }
 
 
-.navbar{
-    min-height: 10vh;
-    background-color: #333;
-    color:#fff;
+/* Navbar Styles */
+.navbar {
+    min-height: 80px;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: #fff;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
 
-    >.logo{
-        font-size: 50px;
-        margin-left: 30px;
+.navbar:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.navbar .logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    background: linear-gradient(45deg, #fff, #64f38c);
+    transition: transform 0.3s ease;
+}
+
+.navbar .logo:hover {
+    transform: scale(1.05);
+}
+
+.navbar ul {
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar ul li {
+    list-style: none;
+    position: relative;
+}
+
+.navbar ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.navbar ul li a:not(.reg-button):hover {
+    color: #64f38c;
+    transform: translateY(-2px);
+}
+
+.navbar ul li a:not(.reg-button)::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #64f38c;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.navbar ul li a:not(.reg-button):hover::after {
+    width: 70%;
+}
+
+/* Register Button */
+.reg-button {
+    background: linear-gradient(45deg, #64f38c, #3a7bd5);
+    color: white !important;
+    padding: 0.6rem 1.5rem !important;
+    border-radius: 30px;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(100, 243, 140, 0.3);
+    transition: all 0.3s ease !important;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.reg-button:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 6px 20px rgba(100, 243, 140, 0.4);
+    color: white !important;
+}
+
+.reg-button:active {
+    transform: translateY(-1px) !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 1rem;
+        text-align: center;
     }
 
-    >ul{
-        display: flex;
-        gap: 10px;
-        margin-right: 40px;
-        >li{
-            font-size: 20px;
-            list-style: none;
-            margin-top: 20px;
->a{
-                text-decoration: none;
-                color: white;
-                &:hover{
-                    color: orange;
-}
-        }
+    .navbar ul {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
     }
-    }}
 
-
-    /* reg button */
-
-.reg-button{
-    background-color:aliceblue;
-    color: black !important;
-    
+    .navbar .logo {
+        margin: 0.5rem 0;
+    }
 }
+
+/* Animation for active link */
+.navbar ul li a.active {
+    color: #64f38c;
+    font-weight: 600;
+}
+
+.navbar ul li a.active::after {
+    width: 70% !important;
+}
+
+/* Add this to your Navbar component's Link components: 
+   className={({ isActive }) => isActive ? 'active' : ''}
+*/
+
 .pagenotfound{
     display: flex;
     justify-content: center;
@@ -127,7 +226,12 @@ background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%,
                 min-width: 25vw;
                 margin-bottom: 5vh;
             }
-        
+       
         }
     }
+}
+
+.link{
+    text-decoration: none;
+    color: #64f38c;
 }

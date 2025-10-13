@@ -8,6 +8,7 @@ import Contact from './components/Contact'
 import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import PageNotFound from './components/PageNotFound'
 import Register from './components/Register'
+import Login from './components/Login'
 // import Gallery from './components/Gallery'
 const App = () => {
   return (
@@ -20,6 +21,8 @@ const App = () => {
  {/* <Route path='/about' element={<Gallery/>}/> */}
  <Route path='/contact' element={<Contact/>}/>
  <Route path='/register' element={<Register/>}/>
+ <Route path='/login' element={<Login/>}/>
+
 
 
 </Routes>
