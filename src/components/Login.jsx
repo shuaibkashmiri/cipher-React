@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import {toast,ToastContainer} from 'react-toastify'
 const Login = () => {
 
     const[email,setEmail]=useState("")
     const[password,setPassword]=useState("")
-
+const navigate=useNavigate()
     const formData={
         email,password
     }
@@ -17,6 +17,8 @@ const handleSubmit=async(e)=>{
     const res=await axios.post(url,formData)
     if(res.data.message === "User Logged in Successfully"){
         toast.success(res.data.message)
+        localStorage.setItem("token",res.data.token)
+        navigate("/dashboard")
     }else{
         toast.error(res.data.message)
     }
