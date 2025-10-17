@@ -3,7 +3,7 @@ import axios from 'axios'
 const UserDashboard = () => {
   const[name,setName]=useState("")
   const[email,setEmail]=useState("")
-
+const [image,setImage]=useState("")
   const getUserDetails=async()=>{
     const url="http://localhost:5000/api/auth/userdetails"
     const token=localStorage.getItem("token")
@@ -12,6 +12,7 @@ const UserDashboard = () => {
       console.log(res.data)
       setName(res.data.getUser.name)
       setEmail(res.data.getUser.email)
+      setImage(res.data.getUser.profilePicture)
 
     } catch (error) {
       console.log(error)
@@ -24,7 +25,8 @@ const UserDashboard = () => {
   return (
     <>
     <div className='dash'>
-    <h1>User Dashboard</h1>  
+    <h1>User Dashboard</h1>
+    <img src={image} className='profile' alt="" />  
     <p>Hello! {name} Welcome to Your Dashboard and your email is {email}</p>
 
     </div>
