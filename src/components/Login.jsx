@@ -35,27 +35,48 @@ const handleSubmit=async(e)=>{
 
 
   return (
-    <div>
-       <div className='register'>
-        <ToastContainer/>
-      <div className='innerReg'>
-<h1>Login to Your Account</h1>
-<form onSubmit={handleSubmit}>
-  <label htmlFor="">Email</label>
-  <input type="text" placeholder='Enter email' value={email} onChange={(e)=>setEmail(e.target.value)} />
-  <label htmlFor="">
-    Password
-  </label>
-  <input type="password" placeholder='Enter Password' value={password} onChange={(e)=>setPassword(e.target.value)}/>
-  <input type="submit" value={"Login"} />
-  <span>Not a User <Link className='link' to={"/register"}>Register</Link></span>
-</form>
-
+    <div className="auth-container">
+      <ToastContainer/>
+      <div className="auth-card">
+        <div className="auth-header">
+          <h1>Welcome Back</h1>
+          <p>Sign in to your account</p>
+        </div>
+        
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="form-group">
+            <label htmlFor="email">Email Address</label>
+            <input 
+              type="email" 
+              id="email"
+              placeholder='Enter your email' 
+              value={email} 
+              onChange={(e)=>setEmail(e.target.value)}
+              required
+            />
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input 
+              type="password" 
+              id="password"
+              placeholder='Enter your password' 
+              value={password} 
+              onChange={(e)=>setPassword(e.target.value)}
+              required
+            />
+          </div>
+          
+          <button type="submit" className="auth-button">
+            Sign In
+          </button>
+          
+          <div className="auth-footer">
+            <span>Don't have an account? <Link className='auth-link' to={"/register"}>Sign up</Link></span>
+          </div>
+        </form>
       </div>
-
-
-
-    </div>
     </div>
   )
 }
