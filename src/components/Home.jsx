@@ -1,44 +1,68 @@
-import React, { Fragment, useState } from 'react'
-import ImageCard from './sharedComponents/ImageCard'
+import React, { useEffect, useState } from 'react'
 import axios from "axios"
-
+import {toast} from 'react-toastify'
 const Home = () => {
+const [title,setTitle]=useState("")
+const [description,setDescription]=useState("")
+const [image,setImage]=useState(null)
+const [blogs,setBlogs]=useState([])
 
-  const [images,setImages]=useState([])
-  const [loading,setLoading]=useState(false)
+const formdata=new FormData()
+formdata.append("title",title)
+formdata.append("description",description)
+formdata.append("image",image)
 
-  const fetchImages=async()=>{
-       const API_KEY = 'AR6IwmyLUc6VPbxRqnJxtBmOpsQfzjpfaDqapwEIrsdJkj1Taf6DaZcw';
-    const url = 'https://api.pexels.com/v1/curated?per_page=12';
-    try {
-        setLoading(true)
-      const res=await axios.get(url,{ headers: {
-          Authorization: API_KEY,
-        },})
-        setImages(res.data.photos)
-        console.log(images)
-        // console.log(res.data.photos)
-      
-    } catch (error) {
-      console.log(error)
-      setLoading(false)
-    }finally{
-      setLoading(false)
-    }
+
+const createBlog=async(e)=>{
+  e.preventDefault();
+  try {
+    const token = localStorage.getItem("token")
+    const url="http://localhost:5000/api/blog/create"
+ const res =await axios.post(url,formdata,{
+      headers:{
+        "Content-Type":"multipart/form-data",
+        Authorization:token  
+      }})
+      console.log(res.data.message)
+
+  } catch (error) {
+    console.log(error)
   }
+} 
 
+const fetchBlogs=async()=>{
+  try {
+    const url="http://localhost:5000/api/blog/all"
+    const res=await axios.get(url)
+    setBlogs(res.data.blogs)
+    console.log(blogs)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+useEffect(()=>{
+  fetchBlogs()
+},)
   return (
-    <>
-    <button onClick={fetchImages}>Get Images</button>
-    <div className='home'>
-    {images.map((photo)=><ImageCard image={photo.src.medium} photographer={photo.photographer} desc={photo.alt}/>)}
-        </div>
-    
-    </>
-      
-      
 
-   
+    <>
+    <div className='home'>
+      <div className="form-group">
+       <form onSubmit={createBlog} className='blog-post'>
+         <input type="file" name="image" onChange={(e)=>setImage(e.target.files[0])} />
+        <input type="text" placeholder='Title' value={title} name='title' onChange={(e)=>setTitle(e.target.value)}/>
+        <input type="text"  placeholder='Description' value={description} name='description' onChange={(e)=>setDescription(e.target.value)}/>
+        <input type="submit" name='Post' value="Post"/>
+       </form>
+      </div>
+      <div className='blogs'>
+
+
+      </div>
+    </div>
+    </>
+    
   )
 }
 
