@@ -4,8 +4,8 @@ const ImageCard = (props) => {
   return (
     <>
     <div className='imageCard'>
-      <p>{props.photographer}</p>
-      <img src={props.image } alt="" />
+      <img src={props.image} alt="" />
+      <h3>Title {props.title}</h3>
       <p>{props.desc}</p>
       
     </div>

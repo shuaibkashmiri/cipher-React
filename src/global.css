@@ -103,6 +103,7 @@
 .home{
     min-height: 90vh;
     display: flex;
+    flex-direction: column;
  flex-wrap:wrap;
 gap: 15px; 
  justify-content:center
@@ -499,7 +500,16 @@ gap: 15px;
  align-items: center; 
  border: 2px solid #0f3460;
  height: 300px;
+ max-width: 500px;
  padding: 20px 10px;
  
 
  }  
+
+ .allblogs{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+ }

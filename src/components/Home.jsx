@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
-import {toast} from 'react-toastify'
+import {toast, ToastContainer} from 'react-toastify'
+import ImageCard from './sharedComponents/ImageCard'
 const Home = () => {
 const [title,setTitle]=useState("")
 const [description,setDescription]=useState("")
 const [image,setImage]=useState(null)
+const [loading,setLoading]=useState(false)
 const [blogs,setBlogs]=useState([])
 
 const formdata=new FormData()
@@ -16,6 +18,7 @@ formdata.append("image",image)
 const createBlog=async(e)=>{
   e.preventDefault();
   try {
+    setLoading(true)
     const token = localStorage.getItem("token")
     const url="http://localhost:5000/api/blog/create"
  const res =await axios.post(url,formdata,{
@@ -23,10 +26,13 @@ const createBlog=async(e)=>{
         "Content-Type":"multipart/form-data",
         Authorization:token  
       }})
-      console.log(res.data.message)
+      toast.success(res.data.message)
 
   } catch (error) {
     console.log(error)
+    setLoading(false)
+  }finally{
+    setLoading(false)
   }
 } 
 
@@ -43,10 +49,12 @@ const fetchBlogs=async()=>{
 
 useEffect(()=>{
   fetchBlogs()
-},)
+  console.log(blogs)
+},[loading])
   return (
 
     <>
+    <ToastContainer/>
     <div className='home'>
       <div className="form-group">
        <form onSubmit={createBlog} className='blog-post'>
@@ -59,6 +67,9 @@ useEffect(()=>{
       <div className='blogs'>
 
 
+      </div>
+      <div className='allblogs'>
+         {blogs.map((blog)=><ImageCard image={blog.photoUrl} title={blog.title} desc={blog.description}/>)}
       </div>
     </div>
     </>
