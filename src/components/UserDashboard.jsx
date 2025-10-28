@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-const UserDashboard = () => {
+import Authorized from '../auth/Authorized'
+const UserDashboard = () => { 
+
+  Authorized()
   const[name,setName]=useState("")
   const[email,setEmail]=useState("")
 const [image,setImage]=useState("")
