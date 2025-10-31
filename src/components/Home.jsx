@@ -15,12 +15,15 @@ const Home = () => {
   formdata.append("description", description);
   formdata.append("image", image);
 
+  const API_URL="http://localhost:5000/api/blog"
+
+  const token = localStorage.getItem("token");
+
   const createBlog = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
-      const token = localStorage.getItem("token");
-      const url = "http://localhost:5000/api/blog/create";
+      const url = `${API_URL}/create`;
       const res = await axios.post(url, formdata, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -38,7 +41,7 @@ const Home = () => {
 
   const fetchBlogs = async () => {
     try {
-      const url = "http://localhost:5000/api/blog/all";
+      const url = `${API_URL}/all`;
       const res = await axios.get(url);
       setBlogs(res.data.blogs);
       console.log(blogs);
@@ -51,6 +54,25 @@ const Home = () => {
     fetchBlogs();
     console.log(blogs);
   }, [loading]);
+
+
+  const handleLike=async(blogId)=>{
+
+    try {
+    const url= `${API_URL}/addlike/${blogId}`
+    const res = await axios.put(url,{}, {
+        headers: {
+          Authorization: token,
+        },})
+  
+    console.log(token)
+    console.log(res.data.message)
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
   return (
     <>
@@ -126,7 +148,8 @@ const Home = () => {
                 </div>
 
                 <div className="post-actions">
-                  <button className="post-action-btn like-btn">Like</button>
+                <span>{blog.likes.length || 0}</span>
+                  <button className="post-action-btn like-btn" onClick={()=>handleLike(blog._id)}>Like</button>
                 </div>
               </div>
             ))}

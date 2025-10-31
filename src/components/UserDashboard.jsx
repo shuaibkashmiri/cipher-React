@@ -13,6 +13,7 @@ const [image,setImage]=useState("")
     try {
       const res=await axios.get(url,{headers:{Authorization:token}})
       console.log(res.data)
+      await localStorage.setItem("userid",res.data.getUser._id)
       setName(res.data.getUser.name)
       setEmail(res.data.getUser.email)
       setImage(res.data.getUser.profilePicture)
