@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
+import Authorized from "../auth/Authorized";
 
 const Home = () => {
+  Authorized()
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
@@ -64,6 +66,7 @@ const Home = () => {
         headers: {
           Authorization: token,
         },})
+        fetchBlogs()
   
     console.log(token)
     console.log(res.data.message)

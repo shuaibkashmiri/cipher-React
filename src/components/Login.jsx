@@ -18,7 +18,7 @@ const handleSubmit=async(e)=>{
     if(res.data.message === "User Logged in Successfully"){
         toast.success(res.data.message)
         localStorage.setItem("token",res.data.token)
-        navigate("/dashboard")
+        navigate("/")
     }else{
         toast.error(res.data.message)
     }
